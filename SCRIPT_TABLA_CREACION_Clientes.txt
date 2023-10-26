@@ -1,0 +1,23 @@
+-- Table: public.clientes
+
+-- DROP TABLE IF EXISTS public.clientes;
+
+CREATE TABLE IF NOT EXISTS public.clientes
+(
+    id_cliente integer NOT NULL DEFAULT nextval('"Clientes_Id_Cliente_seq"'::regclass),
+    id_persona integer NOT NULL,
+    fecha_ingreso date NOT NULL,
+    calificacion character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    estado character varying(15) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "Clientes_pkey" PRIMARY KEY (id_cliente),
+    CONSTRAINT "Clientes_Id_Persona_fkey" FOREIGN KEY (id_persona)
+        REFERENCES public.personas (id_persona) MATCH SIMPLE
+        ON UPDATE SET DEFAULT
+        ON DELETE CASCADE
+        NOT VALID
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.clientes
+    OWNER to postgres;

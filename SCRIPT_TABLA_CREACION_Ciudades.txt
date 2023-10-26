@@ -1,0 +1,19 @@
+-- Table: public.ciudades
+
+-- DROP TABLE IF EXISTS public.ciudades;
+
+CREATE TABLE IF NOT EXISTS public.ciudades
+(
+    id_ciudad integer NOT NULL DEFAULT nextval('"Ciudades_Id_Ciudad_seq"'::regclass),
+    ciudad character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    departamento character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    cod_postal integer NOT NULL,
+    CONSTRAINT "Ciudades_pkey" PRIMARY KEY (id_ciudad),
+    CONSTRAINT "Ciudades_Id_Ciudad_Ciudad_Descrip_key" UNIQUE (id_ciudad)
+        INCLUDE(ciudad)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.ciudades
+    OWNER to postgres;

@@ -1,0 +1,25 @@
+-- Table: public.personas
+
+-- DROP TABLE IF EXISTS public.personas;
+
+CREATE TABLE IF NOT EXISTS public.personas
+(
+    id_persona integer NOT NULL DEFAULT nextval('"Personas_Id_Personas_seq"'::regclass),
+    id_ciudad integer NOT NULL,
+    nombre character varying(40) COLLATE pg_catalog."default" NOT NULL,
+    apellido character varying(40) COLLATE pg_catalog."default" NOT NULL,
+    tipo_docu character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    nro_docu character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    direccion character varying(40) COLLATE pg_catalog."default" NOT NULL,
+    celular character varying(15) COLLATE pg_catalog."default" NOT NULL,
+    email character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    estado character varying(15) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "Personas_pkey" PRIMARY KEY (id_persona),
+    CONSTRAINT "Personas_Id_Personas_Nro_Documento_key" UNIQUE (id_persona)
+        INCLUDE(nro_docu)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.personas
+    OWNER to postgres;

@@ -1,0 +1,28 @@
+-- Table: public.movimientos
+
+-- DROP TABLE IF EXISTS public.movimientos;
+
+CREATE TABLE IF NOT EXISTS public.movimientos
+(
+    id_movimiento integer NOT NULL DEFAULT nextval('"Movimientos_Id_Movimiento_seq"'::regclass),
+    id_cuenta integer NOT NULL,
+    fecha_movimiento date NOT NULL,
+    tipo_movimiento character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    saldo_anterior numeric(18,2),
+    saldo_actual numeric(18,2),
+    monto_movimiento numeric(18,2),
+    cuenta_origen numeric(18,2),
+    cuenta_destino numeric(18,2),
+    canal numeric(18,2),
+    CONSTRAINT "Movimientos_pkey" PRIMARY KEY (id_movimiento),
+    CONSTRAINT "Movimientos_Id_Cuenta_fkey" FOREIGN KEY (id_cuenta)
+        REFERENCES public.cuentas (id_cuenta) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.movimientos
+    OWNER to postgres;

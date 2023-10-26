@@ -1,0 +1,30 @@
+-- Table: public.cuentas
+
+-- DROP TABLE IF EXISTS public.cuentas;
+
+CREATE TABLE IF NOT EXISTS public.cuentas
+(
+    id_cuenta integer NOT NULL DEFAULT nextval('"Cuentas_Id_Cuenta_seq"'::regclass),
+    id_cliente integer NOT NULL,
+    nro_cuenta character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    fecha_alta date NOT NULL,
+    tipo_cuenta character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    estado character varying(15) COLLATE pg_catalog."default" NOT NULL,
+    saldo numeric(20,2),
+    nrocuenta character varying(50) COLLATE pg_catalog."default",
+    nrocontrato character varying(40) COLLATE pg_catalog."default",
+    costo_mantenimiento numeric(20,2),
+    promedio_acreditacion character varying(50) COLLATE pg_catalog."default",
+    moneda character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT "Cuentas_pkey" PRIMARY KEY (id_cuenta),
+    CONSTRAINT "Cuentas_Id_Cliente_fkey" FOREIGN KEY (id_cliente)
+        REFERENCES public.clientes (id_cliente) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+        NOT VALID
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.cuentas
+    OWNER to postgres;
